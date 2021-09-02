@@ -1,4 +1,2 @@
 # MovieBase
-# MovieBase
-# MovieBase
-# MovieBase
+## The movie API
