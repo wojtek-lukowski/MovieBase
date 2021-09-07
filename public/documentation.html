@@ -1,12 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>MovieBase</title>
-  </head>
-  <body>
-<h1>MovieBase</h1>
-<h2>This is the documentation page.</h2>
-<p>This API provides a data base of movies including their title, genre, director, release date, description, main cast and a poster/cover.</p>
+
+<head>
+  <meta charset="utf-8">
+  <title>MovieBase</title>
+</head>
+
+<body>
+  <h1>MovieBase</h1>
+  <h2>This API provides a data base of movies including their title, genre, director, release date, description, main cast and a poster/cover.
+  </h2>
+  <h3>These are the endpoints of the API:</h3>
+
+  <table>
+    <tr>
+      <th>Request</th>
+      <th>URL</th>
+      <th>Response</th>
+    </tr>
+    <tr>
+      <td>GET list of all movies</td>
+      <td>/movies</td>
+      <td>A JSON holding all the titles as objects, e.g.:<br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
+    </tr>
+    <tr>
+      <td>GET list of all users </td>
+      <td>/users</td>
+      <td>A JSON holding all the users as objects, e.g.:<br>{title: User 1,<br>id: 1}</td>
+    </tr>
+    <tr>
+      <td>GET list of all directors </td>
+      <td>/directors</td>
+      <td>A JSON holding all the directors as objects, e.g.:<br>{name: James Cameron,<br>birthDate: 1954}</td>
+    </tr>
+    <tr>
+      <td>GET user by name </td>
+      <td>/users/:username</td>
+      <td>A JSON objects with user' data, e.g.:<br>{name: Wojtek Lukowski,<br>id: 1}</td>
+    </tr>
+    <tr>
+      <td>GET movie by title</td>
+      <td>/movies/:title</td>
+      <td>A JSON object with title's data, e.g.:<br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
+    </tr>
+    <tr>
+      <td>GET director by name</td>
+      <td>/directors/:name</td>
+      <td>A JSON object with directors's data, e.g.:<br>{name: James Cameron,<br>birthDate: 1954}</td>
+    </tr>
+    <tr>
+      <td>GET genre by title</td>
+      <td>/movies/:title</td>
+      <td>A JSON object with directors's data, e.g.:<br>{genre: Action}</td>
+    </tr>
+    <tr>
+      <td>GET list of favorite titles of a single user <br>by user's name</td>
+      <td>/users/:username/favorites</td>
+      <td>A JSON holding all the favorite titles of a single user, e.g.:<br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
+    </tr>
+    <tr>
+      <td>ADD new user<br>Input body: JSON object e.g. {name: Wojtek Lukowski}</td>
+      <td>/users</td>
+      <td>Confirmation message</td>
+    </tr>
+    <tr>
+      <td>DELETE users by id<br>Input body: id numer</td>
+      <td>/users/:id</td>
+      <td>Confirmation message</td>
+    </tr>
+    <tr>
+      <td>ADD a title to user's favs<br>Input body: JSON with movie data, e.g. <br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
+      <td>/users/:username/favorites</td>
+      <td>Confirmation message</td>
+    </tr>
+    <tr>
+      <td>Remove (DELETE) a title from user's favs<br>nput: user's id</td>
+      <td>/users/:username/favorites</td>
+      <td>Confirmation message</td>
+    </tr>
+    <tr>
+      <td>Update (PUT) a username<br>Input: new username</td>
+      <td>/users/:username</td>
+      <td>Confirmation message</td>
+    </tr>
+  </table>
+
 </body>
+
 </html>
