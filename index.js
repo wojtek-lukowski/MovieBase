@@ -3,6 +3,8 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 const Actors = Models.Actor;
+const Directors = Models.Director;
+const Genres = Models.Genre;
 
 mongoose.connect("mongodb://localhost:27017/movieBase", {
   useNewUrlParser: true,
@@ -56,6 +58,18 @@ app.get("/users", (req, res) => {
   Users.find()
     .then((users) => {
       res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//get all directors
+app.get("/director", (req, res) => {
+  Directors.find()
+    .then((director) => {
+      res.status(201).json(director);
     })
     .catch((err) => {
       console.error(err);
