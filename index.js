@@ -65,7 +65,7 @@ app.get("/users", (req, res) => {
 
 //get user by username
 app.get("/users/:Username", (req, res) => {
-  Users.findOne({ Username: req.params.username })
+  Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
     })
@@ -74,6 +74,18 @@ app.get("/users/:Username", (req, res) => {
       res.status(500).send("Error: " + err);
     });
 });
+
+//get user's favs
+// app.get('/users/:Username/movies', (req, res) => {
+//   User.find({Username: req.params.Username })
+//   .then((favorites) => {
+//     res.json(favorites)
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//     res.status(500).send("Error: " + err);
+//   });
+// });
 
 //update user's info
 app.put("/users/:Username", (req, res) => {
@@ -104,7 +116,7 @@ app.post("/users/:Username/movies/:movieID", (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
-      $push: { FavoriteMovies: req.params.MovieID },
+      $push: { Favorites: req.params.movieID },
     },
     { mew: true },
     (err, updatedUser) => {
@@ -119,13 +131,13 @@ app.post("/users/:Username/movies/:movieID", (req, res) => {
 });
 
 //delete a movie from user's favs
-app.delete("/users/:Username/movies/:movieID", (req, res) => {
+app.delete("/users/:Username/movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
-      $pull: { FavoriteMovies: req.params.MovieID },
+      $pull: { Favorites: req.params.MovieID },
     },
-    { mew: true },
+    { new: true },
     (err, updatedUser) => {
       if (err) {
         console.error(err);
@@ -137,7 +149,7 @@ app.delete("/users/:Username/movies/:movieID", (req, res) => {
   );
 });
 
-//delete a user by username
+//remove a user by username
 app.delete("users/:Username", (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
@@ -158,6 +170,42 @@ app.get("/movies", (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//get movie by the title
+app.get("/movies/:Title", (req, res) => {
+  Movies.findOne({ Title: req.params.Title })
+    .then((movie) => {
+      res.json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//get all actors
+app.get("/actors", (req, res) => {
+  Actors.find()
+    .then((actors) => {
+      res.status(201).json(actors);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//get actor by name
+app.get("/actors/:Name", (req, res) => {
+  Actors.findOne({ Name: req.params.Name })
+    .then((actor) => {
+      res.json(actor);
     })
     .catch((err) => {
       console.error(err);

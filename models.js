@@ -28,7 +28,7 @@ let actorSchema = mongoose.Schema({
     Name: {type: String, required: true},
     Bio: {type: String},
     Birthday: Date,
-    Movies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}]
+    Movies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
 });
 
 let Movie = mongoose.model('Movie', movieSchema);
