@@ -21,41 +21,130 @@
     <tr>
       <td>GET list of all movies</td>
       <td>/movies</td>
-      <td>A JSON holding all the titles as objects, e.g.:<br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
+      <td>A JSON holding all the titles as objects, e.g.:<br>{
+        "Genre": {
+        "Name": "Action",
+        "Description": "Action film is a genre in which protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases."
+        },
+        "Director": {
+        "Name": "James Cameron",
+        "Bio": "A Canadian filmmaker. He is best known for making science fiction and epic films. Cameron first gained recognition for directing The Terminator (1984). He found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), and the comedy thriller True Lies (1994). His other big-budget films include Titanic (1997) and Avatar (2009), with Titanic earning him Academy Awards in Best Picture, Best Director and Best Film Editing. Avatar, filmed in 3D technology, also earned him nominations in the same categories.",
+        "Birth": "1954",
+        "Death": "",
+        "Movies": [
+        "613e5a9446378b95b687fba1",
+        "613e5d0e46378b95b687fba2"
+        ]
+        },
+        "_id": "613e5a9446378b95b687fba1",
+        "Title": "The Terminator",
+        "ImagePath": "https://www.imdb.com/title/tt0088247/mediaviewer/rm774208512/",
+        "Featured": true,
+        "Description": "A 1984 science fiction action film directed by James Cameron. It stars Arnold Schwarzenegger as the Terminator, a cyborg assassin sent back in time from 2029 to 1984 to kill Sarah Connor (Linda Hamilton), whose unborn son will one day save mankind from extinction by a hostile artificial intelligence in a post-apocalyptic future. Michael Biehn plays Kyle Reese, a soldier sent back in time to protect Sarah. The screenplay is credited to Cameron and producer Gale Anne Hurd, while co-writer William Wisher Jr. received a credit for additional dialogue.",
+        "Actors": [
+        "61408a0146378b95b687fbb1"
+        ]
+        },</td>
     </tr>
     <tr>
       <td>GET list of all users </td>
       <td>/users</td>
-      <td>A JSON holding all the users as objects, e.g.:<br>{title: User 1,<br>id: 1}</td>
+      <td>A JSON holding all the users as objects, e.g.:<br>{
+        "_id": "6145e0a4096c67597a786f08",
+        "Username": "wojtek",
+        "Password": "ThisIsMyPassword123!",
+        "Birthday": "1972-06-03T00:00:00.000Z",
+        "Favorites": [
+        "613e5a9446378b95b687fba1",
+        "613e5d0e46378b95b687fba2",
+        "613f37f346378b95b687fba8",
+        "613f3b7746378b95b687fbaa",
+        "613f3b7746378b95b687fbaa"
+        ]
+      }</td>
     </tr>
     <tr>
       <td>GET list of all directors </td>
       <td>/directors</td>
-      <td>A JSON holding all the directors as objects, e.g.:<br>{name: James Cameron,<br>birthDate: 1954}</td>
+      <td>A JSON holding all the directors as objects, e.g.:<br>{
+        "Name": "James Cameron",
+        "Bio": "A Canadian filmmaker. He is best known for making science fiction and epic films. Cameron first gained recognition for directing The Terminator (1984). He found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), and the comedy thriller True Lies (1994). His other big-budget films include Titanic (1997) and Avatar (2009), with Titanic earning him Academy Awards in Best Picture, Best Director and Best Film Editing. Avatar, filmed in 3D technology, also earned him nominations in the same categories.",
+        "Birth": "1954",
+        "Death": "",
+        "Movies": [
+        "613e5a9446378b95b687fba1",
+        "613e5d0e46378b95b687fba2"
+      }</td>
     </tr>
     <tr>
       <td>GET user by name </td>
-      <td>/users/:username</td>
-      <td>A JSON objects with user' data, e.g.:<br>{name: Wojtek Lukowski,<br>id: 1}</td>
+      <td>/users/:Username</td>
+      <td>A JSON objects with user' data, e.g.:<br>{
+        "_id": "6145e0a4096c67597a786f08",
+        "Username": "wojtek",
+        "Password": "ThisIsMyPassword123!",
+        "Birthday": "1972-06-03T00:00:00.000Z",
+        "Favorites": [
+        "613e5a9446378b95b687fba1",
+        "613e5d0e46378b95b687fba2",
+        "613f37f346378b95b687fba8",
+        "613f3b7746378b95b687fbaa",
+        "613f3b7746378b95b687fbaa"
+        ]
+      }</td>
     </tr>
     <tr>
       <td>GET movie by title</td>
-      <td>/movies/:title</td>
-      <td>A JSON object with title's data, e.g.:<br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
+      <td>/movies/:Title</td>
+      <td>A JSON object with title's data, e.g.:<br>{
+        "Genre": {
+        "Name": "Action",
+        "Description": "Action film is a genre in which protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases."
+        },
+        "Director": {
+        "Name": "James Cameron",
+        "Bio": "A Canadian filmmaker. He is best known for making science fiction and epic films. Cameron first gained recognition for directing The Terminator (1984). He found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), and the comedy thriller True Lies (1994). His other big-budget films include Titanic (1997) and Avatar (2009), with Titanic earning him Academy Awards in Best Picture, Best Director and Best Film Editing. Avatar, filmed in 3D technology, also earned him nominations in the same categories.",
+        "Birth": "1954",
+        "Death": "",
+        "Movies": [
+        "613e5a9446378b95b687fba1",
+        "613e5d0e46378b95b687fba2"
+        ]
+        },
+        "_id": "613e5a9446378b95b687fba1",
+        "Title": "The Terminator",
+        "ImagePath": "https://www.imdb.com/title/tt0088247/mediaviewer/rm774208512/",
+        "Featured": true,
+        "Description": "A 1984 science fiction action film directed by James Cameron. It stars Arnold Schwarzenegger as the Terminator, a cyborg assassin sent back in time from 2029 to 1984 to kill Sarah Connor (Linda Hamilton), whose unborn son will one day save mankind from extinction by a hostile artificial intelligence in a post-apocalyptic future. Michael Biehn plays Kyle Reese, a soldier sent back in time to protect Sarah. The screenplay is credited to Cameron and producer Gale Anne Hurd, while co-writer William Wisher Jr. received a credit for additional dialogue.",
+        "Actors": [
+        "61408a0146378b95b687fbb1"
+        ]
+        }</td>
     </tr>
     <tr>
       <td>GET director by name</td>
-      <td>/directors/:name</td>
-      <td>A JSON object with directors's data, e.g.:<br>{name: James Cameron,<br>birthDate: 1954}</td>
+      <td>/directors/:Name</td>
+      <td>A JSON object with directors's data, e.g.:<br>{
+        "Name": "James Cameron",
+        "Bio": "A Canadian filmmaker. He is best known for making science fiction and epic films. Cameron first gained recognition for directing The Terminator (1984). He found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), and the comedy thriller True Lies (1994). His other big-budget films include Titanic (1997) and Avatar (2009), with Titanic earning him Academy Awards in Best Picture, Best Director and Best Film Editing. Avatar, filmed in 3D technology, also earned him nominations in the same categories.",
+        "Birth": "1954",
+        "Death": "",
+        "Movies": [
+        "613e5a9446378b95b687fba1",
+        "613e5d0e46378b95b687fba2"
+      }</td>
     </tr>
     <tr>
-      <td>GET genre by title</td>
-      <td>/movies/:title</td>
-      <td>A JSON object with directors's data, e.g.:<br>{genre: Action}</td>
+      <td>GET genre by name</td>
+      <td>/movies/:Genre</td>
+      <td>A JSON object with genre's data, e.g.:<br>{
+        "Name": "Action",
+        "Description": "Action film is a genre in which protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases."
+        }</td>
     </tr>
     <tr>
       <td>GET list of favorite titles of a single user <br>by user's name</td>
-      <td>/users/:username/favorites</td>
+      <td>/users/:Username/movies</td>
       <td>A JSON holding all the favorite titles of a single user, e.g.:<br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
     </tr>
     <tr>
@@ -64,23 +153,23 @@
       <td>Confirmation message</td>
     </tr>
     <tr>
-      <td>DELETE users by id<br>Input body: id numer</td>
-      <td>/users/:id</td>
+      <td>DELETE users by username<br>Input body: username</td>
+      <td>/users/:Username</td>
       <td>Confirmation message</td>
     </tr>
     <tr>
       <td>ADD a title to user's favs<br>Input body: JSON with movie data, e.g. <br>{title: Terminator,<br>director: James Cameron<br>genre: Action}</td>
-      <td>/users/:username/favorites</td>
+      <td>/users/:Username/favorites</td>
       <td>Confirmation message</td>
     </tr>
     <tr>
       <td>Remove (DELETE) a title from user's favs<br>nput: user's id</td>
-      <td>/users/:username/favorites</td>
+      <td>/users/:Username/favorites</td>
       <td>Confirmation message</td>
     </tr>
     <tr>
       <td>Update (PUT) a username<br>Input: new username</td>
-      <td>/users/:username</td>
+      <td>/users/:Username</td>
       <td>Confirmation message</td>
     </tr>
   </table>
