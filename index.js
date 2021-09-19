@@ -66,16 +66,16 @@ app.get("/users", (req, res) => {
 });
 
 //get all directors
-app.get("/director", (req, res) => {
-  Directors.find()
-    .then((director) => {
-      res.status(201).json(director);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+// app.get("/directors", (req, res) => {
+//   Movies.find()
+//     .then((director) => {
+//       res.status(201).json(Movies.Directors.Name);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.status(500).send("Error: " + err);
+//     });
+// });
 
 //get user by username
 app.get("/users/:Username", (req, res) => {
@@ -90,10 +90,34 @@ app.get("/users/:Username", (req, res) => {
 });
 
 //find all movies of a director by his name
-// app.get("/movies/directors/:Name", (req,res) => {
-//   Movies.Director.find({Name: req.params.Name})
-//   .then((movies) => {
-//     res.json(movies);
+app.get("/directors/:Name", (req,res) => {
+  Movies.find({"Director.Name": req.params.Name})
+  .then((movies) => {
+    res.json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+})
+
+//find all movies with an actor by his name
+app.get("/actors/:Name", (req,res) => {
+  Movies.find({"Actors": req.params.Name})
+  .then((movies) => {
+    res.json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+})
+
+//find all genres
+// app.get('/genres', (req, res) => {
+//   Movies.find()
+//   .then((genre) => {
+//     res.status(201).json(genre);
 //   })
 //   .catch((err) => {
 //     console.error(err);
@@ -101,18 +125,30 @@ app.get("/users/:Username", (req, res) => {
 //   });
 // })
 
+//find all movies of a genre by name
+app.get("/genres/:Name", (req,res) => {
+  Movies.find({"Genre.Name": req.params.Name})
+  .then((movies) => {
+    res.json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+})
 
 //get user's favs
 // app.get('/users/:Username/movies', (req, res) => {
 //   User.find({Username: req.params.Username })
-//   .then((user) => {
-//     res.json(user)
+//   .then((Favorites) => {
+//     res.json(Favorites)
 //   })
 //   .catch((err) => {
 //     console.error(err);
 //     res.status(500).send("Error: " + err);
 //   });
 // });
+
 
 //update user's info
 app.put("/users/:Username", (req, res) => {
