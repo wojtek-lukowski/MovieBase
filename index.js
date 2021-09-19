@@ -89,11 +89,24 @@ app.get("/users/:Username", (req, res) => {
     });
 });
 
+//find all movies of a director by his name
+// app.get("/movies/directors/:Name", (req,res) => {
+//   Movies.Director.find({Name: req.params.Name})
+//   .then((movies) => {
+//     res.json(movies);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//     res.status(500).send("Error: " + err);
+//   });
+// })
+
+
 //get user's favs
 // app.get('/users/:Username/movies', (req, res) => {
 //   User.find({Username: req.params.Username })
-//   .then((favorites) => {
-//     res.json(favorites)
+//   .then((user) => {
+//     res.json(user)
 //   })
 //   .catch((err) => {
 //     console.error(err);
@@ -164,7 +177,7 @@ app.delete("/users/:Username/movies/:MovieID", (req, res) => {
 });
 
 //remove a user by username
-app.delete("users/:Username", (req, res) => {
+app.delete("/users/:Username", (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
