@@ -66,16 +66,44 @@ app.get("/users", (req, res) => {
 });
 
 //get all directors
-// app.get("/directors", (req, res) => {
-//   Movies.find()
-//     .then((director) => {
-//       res.status(201).json(Movies.Directors.Name);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).send("Error: " + err);
-//     });
-// });
+app.get("/directors", (req, res) => {
+  Directors.find()
+    .then(() => {
+      res.status(201).json();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//add new director
+app.post("/directors", (req, res) => {
+  Directors.findOne({ Name: req.body.Name })
+    .then((director) => {
+      if (director) {
+        return res.status(400).send(req.body.Name + "already exists");
+      } else {
+        Directors.create({
+          Name: req.body.Name,
+          Bio: req.body.Bio,
+          Birth: req.body.Birth,
+          Death: req.body.Death,
+        })
+          .then((user) => {
+            res.status(201).json(user);
+          })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error: " + error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    });
+});
 
 //get user by username
 app.get("/users/:Username", (req, res) => {
@@ -102,28 +130,28 @@ app.get("/directors/:Name", (req,res) => {
 })
 
 //find all movies with an actor by his name
-app.get("/actors/:Name", (req,res) => {
-  Movies.find({"Actors": req.params.Name})
-  .then((movies) => {
-    res.json(movies);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-})
-
-//find all genres
-// app.get('/genres', (req, res) => {
-//   Movies.find()
-//   .then((genre) => {
-//     res.status(201).json(genre);
+// app.get("/movies/:Name", (req,res) => {
+//   Movies.find({"Actors": req.params.Name})
+//   .then((movies) => {
+//     res.json(movies);
 //   })
 //   .catch((err) => {
 //     console.error(err);
 //     res.status(500).send("Error: " + err);
 //   });
 // })
+
+//find all genres
+app.get('/genres', (req, res) => {
+  Genres.find()
+  .then((genre) => {
+    res.status(201).json(genre);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+})
 
 //find all movies of a genre by name
 app.get("/genres/:Name", (req,res) => {
