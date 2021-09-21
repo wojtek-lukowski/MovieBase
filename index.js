@@ -55,7 +55,7 @@ app.post("/users", (req, res) => {
 
 //get all users
 app.get("/users", (req, res) => {
-  Users.find()
+  Users.find().populate('Movies')
     .then((users) => {
       res.status(201).json(users);
     })
@@ -169,7 +169,7 @@ app.delete("/users/:Username", (req, res) => {
 
 //get all directors
 app.get("/directors", (req, res) => {
-  Directors.find()
+  Directors.find().populate('Movie')
     .then((directors) => {
       res.status(201).json(directors);
     })
@@ -281,7 +281,7 @@ app.get("/genres/:Name", (req, res) => {
 
 //get all movies
 app.get("/movies", (req, res) => {
-  Movies.find()
+  Movies.find().populate('Director').populate('Genre', 'Name')
     .then((movies) => {
       res.status(201).json(movies);
     })
@@ -293,7 +293,7 @@ app.get("/movies", (req, res) => {
 
 //get movie by the title
 app.get("/movies/:Title", (req, res) => {
-  Movies.findOne({ Title: req.params.Title })
+  Movies.findOne({ Title: req.params.Title }).populate('Director').populate('Genre')
     .then((movie) => {
       res.json(movie);
     })
@@ -305,8 +305,8 @@ app.get("/movies/:Title", (req, res) => {
 
 //get all actors
 app.get("/actors", (req, res) => {
-  Actors.find()
-    .then((actors) => {
+  Actors.find().populate('Movie')
+    .then((actors)=> {
       res.status(201).json(actors);
     })
     .catch((err) => {
