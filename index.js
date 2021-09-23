@@ -55,7 +55,7 @@ app.post("/users", (req, res) => {
 
 //get all users
 app.get("/users", (req, res) => {
-  Users.find().populate('Movies')
+  Users.find().populate('Favorites')
     .then((users) => {
       res.status(201).json(users);
     })
@@ -169,7 +169,7 @@ app.delete("/users/:Username", (req, res) => {
 
 //get all directors
 app.get("/directors", (req, res) => {
-  Directors.find().populate('Movie')
+  Directors.find().populate('Movies', 'Title')
     .then((directors) => {
       res.status(201).json(directors);
     })
@@ -305,7 +305,7 @@ app.get("/movies/:Title", (req, res) => {
 
 //get all actors
 app.get("/actors", (req, res) => {
-  Actors.find().populate('Movie')
+  Actors.find().populate('Films')
     .then((actors)=> {
       res.status(201).json(actors);
     })
@@ -317,7 +317,7 @@ app.get("/actors", (req, res) => {
 
 //get actor by name
 app.get("/actors/:Name", (req, res) => {
-  Actors.findOne({ Name: req.params.Name })
+  Actors.findOne({ Name: req.params.Name }).populate('Movies')
     .then((actor) => {
       res.json(actor);
     })
