@@ -21,6 +21,10 @@ app.use(bodyParser.json());
 app.use(morgan("common"));
 app.use(express.static("public"));
 
+let auth = require('./auth.js')(app);
+const passport = require('passport');
+require('./passport');
+
 app.get("/", (req, res) => {
   res.send("Welcome to movieBase!");
 });
@@ -280,7 +284,7 @@ app.get("/genres/:Name", (req, res) => {
 // })
 
 //get all movies
-app.get("/movies", (req, res) => {
+app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find().populate('Director').populate('Genre', 'Name')
     .then((movies) => {
       res.status(201).json(movies);
