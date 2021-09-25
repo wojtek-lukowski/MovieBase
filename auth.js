@@ -1,11 +1,11 @@
-const jwtSecret = 'your_jwt_Secret';
+const jwtSecret = 'your_jwt_secret';
 
 const jwt = require('jsonwebtoken'),
 passport = require('passport');
 // const { eq } = require('lodash');
 // const { serializeUser } = require('passport');
 
-require('./passport');
+require('./passports');
 
 let generateJWTToken = (user) => {
     return jwt.sign(user, jwtSecret, {
@@ -25,7 +25,7 @@ module.exports = (router) => {
                 });
             }
             req.login(user, {session: false }, (error) => {
-                if (erros) {
+                if (error) {
                     res.send(error); 
                 }
                 let token = generateJWTToken(user.toJSON());

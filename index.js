@@ -23,7 +23,7 @@ app.use(express.static("public"));
 
 let auth = require('./auth.js')(app);
 const passport = require('passport');
-require('./passport');
+require('./passports');
 
 app.get("/", (req, res) => {
   res.send("Welcome to movieBase!");
@@ -71,7 +71,7 @@ app.get("/users", (req, res) => {
 
 //get user by username
 app.get("/users/:Username", (req, res) => {
-  Users.findOne({ Username: req.params.Username })
+  Users.findOne({ Username: req.params.Username }).populate('Favorites', 'Title')
     .then((user) => {
       res.json(user);
     })
@@ -296,7 +296,7 @@ app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) 
 });
 
 //get movie by the title
-app.get("/movies/:Title", (req, res) => {
+app.get("/movies/:Title", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ Title: req.params.Title }).populate('Director').populate('Genre')
     .then((movie) => {
       res.json(movie);
