@@ -13,7 +13,7 @@ const { check, validationResult } = require('express-validator');
 //   useUnifiedTopology: true,
 // });
 
-mongoose.connect( process.env.CONNECTION_URI, {
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 });
 
 //add new user
-app.post("/users",
+app.post("/users", 
 [check('Username', 'Username is required').isLength({min: 5}),
 check('Username', 'Username contains non alphanumaeric characters - not allowed.').isAlphanumeric(),
 check('Password', 'Password is required').not().isEmpty(),
@@ -282,8 +282,7 @@ app.get("/movies/:Title", passport.authenticate('jwt', { session: false }), (req
 });
 
 //get all actors
-// app.get("/actors", passport.authenticate('jwt', { session: false }), (req, res) => {
-  app.get("/actors", (req, res) => {
+app.get("/actors", passport.authenticate('jwt', { session: false }), (req, res) => {
   Actors.find().populate('Films')
     .then((actors)=> {
       res.status(201).json(actors);
