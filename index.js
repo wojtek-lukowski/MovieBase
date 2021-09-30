@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 //add new user
 app.post('/users', [
   check('Username', 'Username is required').isLength({min: 5}),
-  check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
+  check('Username', 'Username contains non alphanumeric characters - not allowwed').isAlphanumeric(),
   check('Password', 'Password is requqired').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail()
 
@@ -128,7 +128,6 @@ app.put(
           Password: req.body.Password,
           Email: req.body.Email,
           Birthday: req.body.Birthday,
-          Favorites: req.body.Favorites
         },
       },
       { new: true },
@@ -158,12 +157,12 @@ app.post(
       (err, updatedUser) => {
         if (err) {
           console.error(err);
+          res.status(500).send("Error: " + err);
         } else {
           res.json(updatedUser);
         }
       }
-      );
-      res.status(500).send("Error: " + err);
+    );
   }
 );
 
@@ -241,7 +240,7 @@ app.post(
             Name: req.body.Name,
             Bio: req.body.Bio,
             Birth: req.body.Birth,
-            Death: req.body.Death
+            Death: req.body.Death,
           })
             .then((user) => {
               res.status(201).json(user);
@@ -307,37 +306,6 @@ app.get(
   }
 );
 
-//add new genre
-app.post(
-  "/genres",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Genres.findOne({ Name: req.body.Name })
-      .then((genre) => {
-        if (genre) {
-          return res.status(400).send(req.body.Name + "already exists");
-        } else {
-          Genres.create({
-            Name: req.body.Name,
-            Description: req.body.Description,
-            Movies: req.body.Movies
-          })
-            .then((genre) => {
-              res.status(201).json(genre);
-            })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send("Error: " + error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
-  }
-);
-
 //get all movies
 app.get(
   "/movies",
@@ -374,41 +342,6 @@ app.get(
   }
 );
 
-//add new movie
-app.post(
-  "/movies",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Movies.findOne({ Title: req.body.Title })
-      .then((movie) => {
-        if (movie) {
-          return res.status(400).send(req.body.Title + "already exists");
-        } else {
-          Movies.create({
-            Title: req.body.Title,
-            Description: req.body.Description,
-            Genre: req.body.Genre,
-            Director: req.body.Director,
-            Actors: req.body.Actors,
-           ImagePath: req.body.ImagePath,
-           Featured: req.body.Featured
-          })
-            .then((movie) => {
-              res.status(201).json(movie);
-            })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send("Error: " + error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
-  }
-);
-
 //update movie info
 app.put(
   "/movies/:Movie",
@@ -440,7 +373,6 @@ app.put(
   }
 );
 
-
 //get all actors
 app.get(
   "/actors",
@@ -459,12 +391,14 @@ app.get(
 );
 
 //get actor by name
-app.get("/actors/:Name",
+app.get(
+  "/actors/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Actors.findOne({ Name: req.params.Name })
       .populate("Films")
-      .then((actor) => {res.json(actor);
+      .then((actor) => {
+        res.json(actor);
       })
       .catch((err) => {
         console.error(err);
@@ -473,43 +407,10 @@ app.get("/actors/:Name",
   }
 );
 
-//add new actor
-app.post(
-  "/actors",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Actors.findOne({ Name: req.body.Name })
-      .then((actor) => {
-        if (actor) {
-          return res.status(400).send(req.body.Name + "already exists");
-        } else {
-          Actors.create({
-            Name: req.body.Name,
-            Bio: req.body.Bio,
-            Birthday: req.body.Birthday,
-            Films: req.body.Films
-          })
-            .then((genre) => {
-              res.status(201).json(genre);
-            })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send("Error: " + error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
-  }
-);
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
-
 
 const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
