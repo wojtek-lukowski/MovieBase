@@ -280,7 +280,7 @@ app.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Directors.findOneAndUpdate(
-      { Name: req.params.Name,
+      { Name: req.params.Name },
       {
         $set: {
           Name: req.body.Name,
