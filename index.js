@@ -402,6 +402,41 @@ app.put(
   }
 );
 
+//add new movie
+app.post(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.findOne({ Name: req.body.Title })
+      .then((movie) => {
+        if (movie) {
+          return res.status(400).send(req.body.Title + "already exists");
+        } else {
+          Directors.create({
+            Title: req.body.Title,
+            Description: req.body.Description,
+            Genre: req.body.Genre,
+            Director: req.body.Director,
+            Actors: req.body.Actors,
+            ImagePath: req.body.ImagePath,
+            Featured: req.body.Featured
+          })
+            .then((user) => {
+              res.status(201).json(user);
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send("Error: " + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
+
 //get all actors
 app.get(
   "/actors",
