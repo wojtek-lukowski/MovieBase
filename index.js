@@ -412,7 +412,7 @@ app.post(
         if (movie) {
           return res.status(400).send(req.body.Title + "already exists");
         } else {
-          Directors.create({
+          Movies.create({
             Title: req.body.Title,
             Description: req.body.Description,
             Genre: req.body.Genre,
