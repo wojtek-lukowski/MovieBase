@@ -303,7 +303,6 @@ app.put(
   }
 );
 
-
 //get all genres
 app.get(
   "/genres",
