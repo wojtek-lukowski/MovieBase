@@ -373,7 +373,7 @@ app.get(
 
 //update movie info
 app.put(
-  "/movies/:Movie",
+  "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOneAndUpdate(
@@ -436,6 +436,34 @@ app.get(
   }
 );
 
+//update actor info
+app.put(
+  "/actors/:Name",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Actors.findOneAndUpdate(
+      { Name: req.params.Name },
+      {
+        $set: {
+          Name: req.body.Name,
+            Bio: req.body.Bio,
+            Birthday: req.body.Birthday,
+            Films: req.body.Films
+        },
+      },
+      { new: true },
+      (err, updatedMovie) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        } else {
+          res.json(updatedMovie);
+        }
+      }
+    );
+  }
+);
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
@@ -445,3 +473,4 @@ const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log("Listening on Port " + port);
 });
+
