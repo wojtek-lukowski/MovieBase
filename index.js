@@ -274,6 +274,36 @@ app.get(
   }
 );
 
+//update directors's info
+app.put(
+  "/directors/:Name",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Directors.findOneAndUpdate(
+      { Name: req.params.Name,
+      {
+        $set: {
+          Name: req.body.Name,
+          Bio: req.body.Bio,
+          Birth: req.body.Birth,
+          Death: req.body.Death,
+          Movies: req.body.Movies,
+        },
+      },
+      { new: true },
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        } else {
+          res.json(updatedUser);
+        }
+      }
+    );
+  }
+);
+
+
 //get all genres
 app.get(
   "/genres",
