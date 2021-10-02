@@ -335,6 +335,37 @@ app.get(
   }
 );
 
+//add new genre
+app.post(
+  "/genres",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Genres.findOne({ Name: req.body.Name })
+      .then((genre) => {
+        if (genre) {
+          return res.status(400).send(req.body.Name + "already exists");
+        } else {
+          Genres.create({
+            Name: req.body.Name,
+            Description: req.body.Description,
+            Movies: req.body.Movies
+          })
+            .then((actor) => {
+              res.status(201).json(actor);
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send("Error: " + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
+
 //get all movies
 app.get(
   "/movies",
@@ -421,8 +452,8 @@ app.post(
             ImagePath: req.body.ImagePath,
             Featured: req.body.Featured
           })
-            .then((user) => {
-              res.status(201).json(user);
+            .then((movie) => {
+              res.status(201).json(movie);
             })
             .catch((error) => {
               console.error(error);
@@ -498,6 +529,39 @@ app.put(
     );
   }
 );
+
+//add new actor
+app.post(
+  "/actors",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Actors.findOne({ Name: req.body.Name })
+      .then((actor) => {
+        if (actor) {
+          return res.status(400).send(req.body.Name + "already exists");
+        } else {
+          Actors.create({
+            Name: req.body.Name,
+            Bio: req.body.Bio,
+          Birthday: req.body.Birthday,
+            Films: req.body.Films,
+          })
+            .then((actor) => {
+              res.status(201).json(actor);
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send("Error: " + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
