@@ -438,10 +438,10 @@ app.post(
   "/movies",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Name: req.body.Title })
+    Movies.findOne({ Title: req.body.Title })
       .then((movie) => {
         if (movie) {
-          return res.status(400).send(req.body.Title + "already exists");
+          return res.status(400).send(req.body.Title + " already exists");
         } else {
           Movies.create({
             Title: req.body.Title,
@@ -449,8 +449,8 @@ app.post(
             Genre: req.body.Genre,
             Director: req.body.Director,
             Actors: req.body.Actors,
-            ImagePath: req.body.ImagePath,
-            Featured: req.body.Featured
+           ImagePath: req.body.ImagePath,
+           Featured: req.body.Featured
           })
             .then((movie) => {
               res.status(201).json(movie);
