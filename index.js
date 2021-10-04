@@ -114,23 +114,11 @@ app.get(
   }
 );
 
-//update user's info /hashing added
+//update user's info //hashing added
 app.put(
   "/users/:Username",
-  [
-    check('Username', 'Username is required').isLength({min: 5}),
-    check('Username', 'Username contains non alphanumeric characters - not allowwed').isAlphanumeric(),
-    check('Password', 'Password is requqired').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()
-  
-  ](req, res) => {
-
-    let errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
-
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -152,7 +140,8 @@ app.put(
         }
       }
     );
-  });
+  }
+);
 
 //add a movie to user's favs
 app.post(
