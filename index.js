@@ -58,7 +58,6 @@ if (!errors.isEmpty()) {
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
-      //If the user is found, send a response that it already exists
         return res.status(400).send(req.body.Username + ' already exists');
       } else {
         Users
@@ -126,7 +125,7 @@ app.put(
       {
         $set: {
           Username: req.body.Username,
-          Password: req.body.Password,
+          Password: hashedPassword,
           Email: req.body.Email,
           Birthday: req.body.Birthday,
         },
