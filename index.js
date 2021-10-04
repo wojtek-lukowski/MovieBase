@@ -138,8 +138,10 @@ app.put(
         } else {
           res.json(updatedUser);
         }
-      });
-  });
+      }
+    );
+  }
+);
 
 //add a movie to user's favs
 app.post(
