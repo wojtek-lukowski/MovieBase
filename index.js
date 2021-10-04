@@ -55,7 +55,7 @@ if (!errors.isEmpty()) {
 }
 
   let hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
+  Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
       //If the user is found, send a response that it already exists
@@ -120,6 +120,7 @@ app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
