@@ -114,7 +114,7 @@ app.get(
   }
 );
 
-//update user's info
+//update user's info /hashing added
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
