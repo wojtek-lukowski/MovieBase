@@ -367,10 +367,7 @@ app.post(
 );
 
 //get all movies
-app.get(
-  "/movies",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+app.get("/movies", function(req, res) {
     Movies.find()
       .populate("Director")
       .populate("Genre", "Name")
