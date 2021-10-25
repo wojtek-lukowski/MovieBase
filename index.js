@@ -31,13 +31,26 @@ app.use(express.static("public"));
 
 app.use(cors());
 
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1){
+      let message = 'The CORS policy for this app does not allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 let auth = require("./auth")(app);
 const passport = require("passport");
 require("./passports");
 
-app.get("/", (req, res) => {
-  res.send("Welcome to movieBase!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to movieBase!");
+// });
 
 //add new user
 app.post('/users', [
