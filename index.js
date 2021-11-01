@@ -277,6 +277,7 @@ app.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Directors.findOne({ Name: req.params.Name })
+    .populate("Movies")
       .then((director) => {
         res.json(director);
       })
