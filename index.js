@@ -31,7 +31,7 @@ app.use(express.static("public"));
 
 app.use(cors());
 
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'http://testsite.com', 'https://upload.wikimedia.org/'];
 
 app.use(cors({
   origin: (origin, callback) => {
