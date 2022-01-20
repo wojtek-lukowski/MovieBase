@@ -415,24 +415,6 @@ app.get(
   }
 );
 
-//get movie by the id
-app.get(
-  "/movies/:Title",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Movies.findOne({ _id: req.params._id })
-      .populate("Director")
-      .populate("Genre")
-      .then((movie) => {
-        res.json(movie);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
-
 //update movie info
 app.put(
   "/movies/:Title",
