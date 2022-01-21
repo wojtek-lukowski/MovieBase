@@ -130,7 +130,7 @@ app.get(
 //update user's info //hashing added
 app.put(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
