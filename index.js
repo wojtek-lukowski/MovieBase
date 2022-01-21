@@ -159,7 +159,7 @@ app.put(
 //add a movie to user's favs
 app.post(
   "/users/:Username/movies/:MovieID",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
