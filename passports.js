@@ -7,6 +7,9 @@ let Users = Models.User,
 JWTStrategy = passportJWT.Strategy,
 ExtractJWT = passportJWT.ExtractJwt;
 
+/**
+ * jsdoc testing
+ */
 passport.use(new LocalStrategy({
     usernameField: 'Username',
     passwordField: 'Password'
