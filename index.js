@@ -31,7 +31,7 @@ app.use(express.static("public"));
 
 app.use(cors());
 
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:4200', 'https://wojtek-lukowski.github.io/MovieBase-Angular/', 'https://wojtek-lukowski.github.io', 'http://localhost:1234', 'http://testsite.com', 'https://compassionate-kare-ec9836.netlify.app/', 'https://upload.wikimedia.org/', 'https://upload.wikimedia.org/wikipedia/en/8/80/The_Girl_with_the_Dragon_Tattoo_Poster.jpg'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:4200', 'https://compassionate-kare-ec9836.netlify.app', 'https://wojtek-lukowski.github.io/MovieBase-Angular/', 'https://wojtek-lukowski.github.io', 'http://localhost:1234', 'http://testsite.com', 'https://compassionate-kare-ec9836.netlify.app/', 'https://upload.wikimedia.org/', 'https://upload.wikimedia.org/wikipedia/en/8/80/The_Girl_with_the_Dragon_Tattoo_Poster.jpg'];
 
 app.use(cors({
   origin: (origin, callback) => {
